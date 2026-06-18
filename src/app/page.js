@@ -71,6 +71,8 @@ export default function Home() {
     .catch(() => setStatus('error'));
   };
 
+  const [activeFeatured, setActiveFeatured] = useState(0);
+
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 bg-zinc-950">
@@ -167,7 +169,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="about" className="py-24">
+      <section id="about" className="pt-24">
         <div className="max-w-6xl mx-auto px-6">
           {/* Título */}
           <div className="flex items-center gap-4 mb-12">
@@ -249,7 +251,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="education" className="py-24">
+      <section id="education" className="pt-30">
         <div className="max-w-6xl mx-auto px-6">
           {/* Título */}
           <div className="flex items-center gap-4 mb-16">
@@ -461,11 +463,238 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="projects">
-        <h2>.</h2>
+      <section id="projects" className="pt-30">
+        <div className="max-w-6xl mx-auto px-6">
+
+          {/* Título */}
+          <div className="flex items-center gap-4 mb-16">
+            <h2 className="font-[family-name:var(--font-syne)] text-3xl font-bold text-white whitespace-nowrap">
+              <span className="text-violet-400">/</span> proyectos
+            </h2>
+            <div className="flex-1 h-px bg-white/10"></div>
+          </div>
+
+          {/* Carrusel destacado */}
+          {(() => {
+            const featured = [
+              {
+                title: 'EncomiExpress',
+                description: 'Sistema de gestión web y móvil para OsvaldoC Mensajería y Logística S.A.S. Centraliza ventas, encomiendas, rutas, conductores, vehículos y pagos en una sola plataforma, reemplazando procesos manuales por un sistema digital. Proyecto de grado — SENA, Regional Antioquia.',
+                techs: ['Node.js', 'Express', 'PostgreSQL', 'Sequelize', 'React', 'Vite', 'Material UI', 'Flutter', 'Dart'],
+                github: 'https://github.com/valeriaPaz04',
+                demo: null,
+                status: 'progress',
+                image: '/encomiexpressLogo.png',
+              },
+              {
+                title: 'Tienda Virtual',
+                description: 'Tienda de ropa con catálogo de productos, carrito, sistema de pedidos, gestión de inventario por talla y panel de administración personalizado con Jazzmin. Reportes de ventas en Excel y PDF.',
+                techs: ['Django', 'SQLite', 'Jazzmin', 'OpenPyXL', 'xhtml2pdf'],
+                github: 'https://github.com/valeriaPaz04/tienda_virtual-django',
+                demo: null,
+                status: 'maintenance',
+                image: null,
+              },
+            ];
+
+            return (
+              <div className="relative rounded-2xl overflow-hidden border border-white/10 mb-8 group"
+                style={{ minHeight: '370px' }}
+                onMouseEnter={e => {
+                  e.currentTarget.querySelector('.arrow-left').style.opacity = '1';
+                  e.currentTarget.querySelector('.arrow-right').style.opacity = '1';
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.querySelector('.arrow-left').style.opacity = '0';
+                  e.currentTarget.querySelector('.arrow-right').style.opacity = '0';
+                }}
+              >
+                {featured.map((item, i) => (
+                  <div key={item.title} id={`featured-${i}`}
+                    className="absolute inset-0 transition-opacity duration-500"
+                    style={{ opacity: i === 0 ? 1 : 0, pointerEvents: i === 0 ? 'auto' : 'none' }}
+                  >
+                    {/* Fondo */}
+                    {item.image
+                      ? <img src={item.image} alt={item.title} className="absolute inset-0 w-full h-full object-cover opacity-40" />
+                      : <div className="absolute inset-0 bg-gradient-to-br from-violet-950 via-zinc-900 to-zinc-950" />
+                    }
+                    <div className="absolute inset-0 opacity-10"
+                      style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #8b5cf6 0%, transparent 50%), radial-gradient(circle at 80% 20%, #6d28d9 0%, transparent 40%)' }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/95 via-zinc-950/70 to-transparent" />
+
+                    {/* Contenido */}
+                    <div className="relative px-18 py-12 flex flex-col justify-between min-h-72">
+                      <div>
+                        <div className="flex items-center gap-3 mb-4">
+                          <span className="text-xs font-medium px-3 py-1 rounded-full bg-violet-500/20 text-violet-300 border border-violet-500/30">
+                            ⋆.˚
+                          </span>
+                          {item.status === 'progress' && (
+                            <span className="text-xs font-medium px-3 py-1 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/25">En desarrollo</span>
+                          )}
+                          {item.status === 'maintenance' && (
+                            <span className="text-xs font-medium px-3 py-1 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/25">En mantenimiento</span>
+                          )}
+                        </div>
+                        <h3 className="font-[family-name:var(--font-syne)] text-3xl font-bold text-white mb-3">{item.title}</h3>
+                        <p className="text-zinc-300 text-sm leading-relaxed max-w-xl mb-6">{item.description}</p>
+                        <div className="flex flex-wrap gap-2 mb-8">
+                          {item.techs.map(t => (
+                            <span key={t} className="text-xs px-2.5 py-1 rounded-md bg-white/5 text-zinc-400 border border-white/8">{t}</span>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="flex gap-3">
+                        <a href={item.github} target="_blank" rel="noreferrer"
+                          className="flex items-center gap-2 px-4 py-2 rounded-lg border border-white/15 text-zinc-300 text-sm hover:text-white hover:border-white/30 transition-all">
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+                          </svg>
+                          GitHub
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+
+                {/* Flechas */}
+                <button className="arrow-left absolute left-4 top-1/2 -translate-y-1/2 z-10 text-white/40 hover:text-white transition-colors"
+                  style={{ opacity: 0, transition: 'opacity 0.2s', background: 'none', border: 'none', cursor: 'pointer', fontSize: '28px', lineHeight: 1, padding: '8px' }}
+                  onClick={() => {
+                    const slides = document.querySelectorAll('[id^="featured-"]');
+                    let current = [...slides].findIndex(s => s.style.opacity === '1');
+                    let prev = (current - 1 + slides.length) % slides.length;
+                    slides[current].style.opacity = '0';
+                    slides[current].style.pointerEvents = 'none';
+                    slides[prev].style.opacity = '1';
+                    slides[prev].style.pointerEvents = 'auto';
+                    setActiveFeatured(prev);
+                  }}>
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round">
+                    <polyline points="15 18 9 12 15 6"/>
+                  </svg>
+                </button>
+
+                <button className="arrow-right absolute right-4 top-1/2 -translate-y-1/2 z-10 text-white/40 hover:text-white transition-colors"
+                  style={{ opacity: 0, transition: 'opacity 0.2s', background: 'none', border: 'none', cursor: 'pointer', fontSize: '28px', lineHeight: 1, padding: '8px' }}
+                  onClick={() => {
+                    const slides = document.querySelectorAll('[id^="featured-"]');
+                    let current = [...slides].findIndex(s => s.style.opacity === '1');
+                    let next = (current + 1) % slides.length;
+                    slides[current].style.opacity = '0';
+                    slides[current].style.pointerEvents = 'none';
+                    slides[next].style.opacity = '1';
+                    slides[next].style.pointerEvents = 'auto';
+                    setActiveFeatured(next);
+                  }}>
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round">
+                    <polyline points="9 18 15 12 9 6"/>
+                  </svg>
+                </button>
+
+                {/* Dots */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                  {featured.map((_, i) => (
+                    <button key={i}
+                      style={{
+                        width: i === activeFeatured ? '16px' : '6px',
+                        height: '6px',
+                        borderRadius: '999px',
+                        background: i === activeFeatured ? '#a78bfa' : 'rgba(255,255,255,0.3)',
+                        border: 'none',
+                        cursor: 'pointer',
+                        padding: 0,
+                        transition: 'all 0.3s',
+                      }}
+                      onClick={() => {
+                        const slides = document.querySelectorAll('[id^="featured-"]');
+                        slides.forEach((s, j) => {
+                          s.style.opacity = j === i ? '1' : '0';
+                          s.style.pointerEvents = j === i ? 'auto' : 'none';
+                        });
+                        setActiveFeatured(i);
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
+
+          {/* Grid 3 columnas */}
+          <div className="grid grid-cols-3 gap-6">
+            {[
+              {
+                title: 'React Form App',
+                description: 'App de registro y autenticación con animaciones que responden al progreso del usuario. Las imágenes se colorean conforme completas los campos.',
+                techs: ['React 18', 'React Router', 'CSS3', 'LocalStorage'],
+                github: 'https://github.com/valeriaPaz04/reactForm',
+                demo: 'https://valeriapaz04.github.io/reactForm/',
+                image: '/reactForm.png',
+              },
+              {
+                title: 'Concepts React',
+                description: 'Proyecto educativo que explora conceptos fundamentales de React: Props, Estado, Hooks, Ciclo de Vida, Virtual DOM y Redux.',
+                techs: ['React 19', 'React Router', 'JavaScript', 'Swiper'],
+                github: 'https://github.com/valeriaPaz04/concepts-react',
+                demo: 'https://valeriapaz04.github.io/concepts-react/',
+                image: '/conceptsReact.png',
+              },
+              {
+                title: 'Funciones JavaScript',
+                description: 'Repositorio educativo sobre funciones en JavaScript: funciones tradicionales, funciones flecha, callbacks y promesas.',
+                techs: ['JavaScript', 'HTML', 'CSS'],
+                github: 'https://github.com/valeriaPaz04/funciones-javascript',
+                demo: 'https://valeriapaz04.github.io/funciones-javascript/',
+                image: '/funcionesJS.png',
+              },
+            ].map(({ title, description, techs, github, demo, image }) => (
+              <div key={title}
+                className="flex flex-col rounded-2xl border border-white/10 bg-white/[0.02] overflow-hidden hover:border-white/20 transition-all">
+
+                {/* Imagen */}
+                <div className="h-44 overflow-hidden flex-shrink-0 bg-zinc-900">
+                  <img src={image} alt={title} className="w-full h-full object-cover object-top" />
+                </div>
+
+                {/* Info */}
+                <div className="flex flex-col flex-1 p-5">
+                  <h3 className="font-[family-name:var(--font-syne)] text-base font-bold text-white mb-2">{title}</h3>
+                  <p className="text-zinc-400 text-sm leading-relaxed mb-4 flex-1">{description}</p>
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {techs.map(t => (
+                      <span key={t} className="text-xs px-2 py-0.5 rounded bg-white/5 text-zinc-500 border border-white/8">{t}</span>
+                    ))}
+                  </div>
+                  <div className="flex gap-3 mt-auto">
+                    <a href={github} target="_blank" rel="noreferrer"
+                      className="flex items-center gap-1.5 text-xs text-zinc-400 hover:text-white transition-colors">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+                      </svg>
+                      GitHub
+                    </a>
+                    <a href={demo} target="_blank" rel="noreferrer"
+                      className="flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                        <polyline points="15 3 21 3 21 9"/>
+                        <line x1="10" y1="14" x2="21" y2="3"/>
+                      </svg>
+                      Demo
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
       </section>
 
-      <section id="contact" className="py-24">
+      <section id="contact" className="pt-30 pb-24">
         <div className="max-w-5xl mx-auto px-6">
           {/* Título */}
           <div className="flex items-center gap-4 mb-16">
