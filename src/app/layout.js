@@ -12,8 +12,11 @@ const dm_sans = DM_Sans({
 });
 
 export const metadata = {
-  title: "val.Dev | Portfolio of Valeria Paz",
+  title: "val.Dev | Portafolio de Valeria Paz",
   description: "Portafolio de Valeria Paz Arana",
+  icons: {
+    icon: "/valDevLogo.png",
+  },
 };
 
 export default function RootLayout({ children }) {
