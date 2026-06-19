@@ -23,6 +23,17 @@ const techs = [
   { name: 'Bootstrap',   icon: SiBootstrap,      color: '#8911fb' },
 ];
 
+const educationTags = [
+  'Curiosidad',
+  'Pensamiento Crítico',
+  'Disciplina',
+  'Aprendizaje Continuo',
+  'Atención al Detalle',
+  'Gestión del Tiempo',
+  'Adaptabilidad',
+  'Resolución de Problemas',
+];
+
 export default function Home() {
   const [form, setForm] = useState({
     name: '',
@@ -32,6 +43,7 @@ export default function Home() {
 
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState('');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const validateEmail = (email) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -76,14 +88,14 @@ export default function Home() {
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 bg-zinc-950">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-4 py-3 md:px-6 md:py-4 flex items-center justify-between gap-4 border-b border-white/10">
           {/* Logo izquierdo */}
-          <h1 className="font-[family-name:var(--font-syne)] text-white font-bold text-xl tracking-tight">
+          <h1 className="font-[family-name:var(--font-syne)] text-white font-bold text-xl tracking-tight flex-shrink-0">
             val<span className="text-violet-500">.</span>Dev
           </h1>
           {/* Nav */}
-          <nav>
-            <ul className="flex gap-6">
+          <nav className="hidden md:block">
+            <ul className="flex gap-4 lg:gap-6">
               <li><a href="#home" className="nav-link text-sm text-zinc-400 hover:text-white transition-colors">Inicio</a></li>
               <li><a href="#about" className="nav-link text-sm text-zinc-400 hover:text-white transition-colors">Sobre mí</a></li>
               <li><a href="#education" className="nav-link text-sm text-zinc-400 hover:text-white transition-colors">Educación</a></li>
@@ -92,11 +104,11 @@ export default function Home() {
             </ul>
           </nav>
           {/* Iconos derecha */}
-          <ul className="flex gap-4 items-center">
+          <ul className="flex gap-3 md:gap-4 items-center flex-shrink-0">
             <li>
               <a href="mailto:valeriapazarana@gmail.com" className="text-zinc-400 hover:text-white transition-colors">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                 </svg>
               </a>
             </li>
@@ -115,14 +127,34 @@ export default function Home() {
               </a>
             </li>
           </ul>
+          <button
+            type="button"
+            className="md:hidden text-zinc-400 hover:text-white transition-colors flex-shrink-0"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Abrir menú"
+            aria-expanded={mobileMenuOpen}
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+              <path d="M4 7h16M4 12h16M4 17h16"/>
+            </svg>
+          </button>
         </div>
+        <nav className={`md:hidden border-b border-white/10 bg-zinc-950 transition-all ${mobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
+          <ul className="flex flex-col gap-1 px-4 py-3">
+            <li><a href="#home" onClick={() => setMobileMenuOpen(false)} className="nav-link text-sm text-zinc-400 hover:text-white transition-colors">Inicio</a></li>
+            <li><a href="#about" onClick={() => setMobileMenuOpen(false)} className="nav-link text-sm text-zinc-400 hover:text-white transition-colors">Sobre mí</a></li>
+            <li><a href="#education" onClick={() => setMobileMenuOpen(false)} className="nav-link text-sm text-zinc-400 hover:text-white transition-colors">Educación</a></li>
+            <li><a href="#projects" onClick={() => setMobileMenuOpen(false)} className="nav-link text-sm text-zinc-400 hover:text-white transition-colors">Proyectos</a></li>
+            <li><a href="#contact" onClick={() => setMobileMenuOpen(false)} className="nav-link text-sm text-zinc-400 hover:text-white transition-colors">Contacto</a></li>
+          </ul>
+        </nav>
       </header>
 
-      <section id="home" className="flex items-center mt-30">
-        <div className="max-w-6xl mx-auto px-6 w-full flex items-center justify-between gap-10">
+      <section id="home" className="flex items-center pt-32">
+        <div className="max-w-5xl mx-auto px-4 md:px-6 w-full flex flex-col-reverse md:flex-row items-center justify-between gap-8 md:gap-10">
           {/* Texto izquierda */}
-          <div className="flex-1">
-            <h1 className="font-[family-name:var(--font-syne)] text-5xl font-bold text-white leading-tight mb-6">
+          <div className="flex-1 min-w-0">
+            <h1 className="font-[family-name:var(--font-syne)] text-4xl sm:text-5xl md:text-5xl font-bold text-white leading-tight mb-6 max-w-full break-words">
               Hola, soy<br />
               <TypeWriter text="Valeria Paz Arana" className="text-violet-400" />
             </h1>
@@ -131,18 +163,18 @@ export default function Home() {
               y desarrollando una visión integral del software, desde la 
               interfaz hasta la lógica detrás de cada aplicación.
             </p>
-            <div className="flex gap-4 mt-8">
+            <div className="flex flex-col sm:flex-row gap-4 mt-8">
               {/* Botón email */}
               <a href="#contact"
-                className="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-violet-500 text-violet-400 hover:bg-violet-500 hover:text-white transition-colors text-sm font-medium">
+                className="flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg border border-violet-500 text-violet-400 hover:bg-violet-500 hover:text-white transition-colors text-sm font-medium w-full sm:w-auto">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                 </svg>
                 Contáctame
               </a>
               {/* Botón CV */}
               <a href="/HOJADEVIDA-VALERIAPAZARANA.pdf" target="_blank" rel="noreferrer"
-                className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-violet-500 text-white hover:bg-violet-600 transition-colors text-sm font-medium">
+                className="flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-violet-500 text-white hover:bg-violet-600 transition-colors text-sm font-medium w-full sm:w-auto">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
                 </svg>
@@ -151,8 +183,8 @@ export default function Home() {
             </div>
           </div>
           {/* Foto derecha */}
-          <div className="flex-shrink-0">
-            <div className="relative w-72">
+          <div className="flex-shrink-0 w-full md:w-auto md:flex-shrink-0 min-w-0">
+            <div className="relative w-56 sm:w-64 md:w-72 mx-auto md:mx-0">
               
               <div className="absolute inset-0 -z-10"
                 style={{
@@ -163,16 +195,16 @@ export default function Home() {
                 }}
               />
 
-              <img src="/profile.png" alt="Valeria Paz Arana" className="w-full h-full object-cover"/>
+              <img src="/profile.png" alt="Valeria Paz Arana" className="w-full h-auto md:h-full object-cover"/>
             </div>
           </div>
         </div>
       </section>
 
       <section id="about" className="pt-24">
-        <div className="max-w-6xl mx-auto px-6">
+        <div className="max-w-5xl mx-auto px-4 md:px-6">
           {/* Título */}
-          <div className="flex items-center gap-4 mb-12">
+          <div className="flex items-center gap-4 mb-8 md:mb-12">
             <h2 className="font-[family-name:var(--font-syne)] text-3xl font-bold text-white">
               <span className="text-violet-400">/</span> sobre mí
             </h2>
@@ -180,14 +212,14 @@ export default function Home() {
           </div>
           {/* Contenido */}
           <div>
-            <div className="flex gap-16 items-start">
+            <div className="flex flex-col md:flex-row gap-10 md:gap-16 items-start">
               {/* Texto izquierda */}
               <div className="flex-1 space-y-5 text-zinc-400 text-base leading-relaxed">
                 <p>
                   Soy estudiante de <span className="text-white font-medium">Tecnología en Análisis y Desarrollo de Software</span> en el SENA, con formación técnica previa en Programación de Software.
                 </p>
                 <p>
-                  Me apasiona crear interfaces atractivas sin perder de vista la lógica detrás de cada aplicación. Actualmente participo en el desarrollo de <span className="text-white font-medium">EncomiExpress</span>, un proyecto real donde aplico mis conocimientos en desarrollo web, bases de datos y soluciones prácticas.
+                  Me apasiona crear <span className="text-white font-medium">interfaces atractivas</span> sin perder de vista la lógica detrás de cada aplicación. Actualmente participo en el desarrollo de <span className="text-white font-medium">EncomiExpress</span>, un proyecto real donde aplico mis conocimientos en desarrollo web, bases de datos y soluciones prácticas.
                 </p>
                 <p>
                   Más allá del desarrollo web, me genera curiosidad el <span className="text-white font-medium">machine learning</span> y las matemáticas aplicadas a la tecnología. Fuera del código, entreno en el gimnasio, juego videojuegos y disfruto tener todo organizado.
@@ -209,7 +241,7 @@ export default function Home() {
                     svg: <path d="M20 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-8h16v8zm0-10H4V6h16v2z"/>
                   },
                   {
-                    label: "Full-Stack en progreso",
+                    label: "Explorando áreas",
                     svg: <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
                   },
                 ].map(({ label, svg }) => (
@@ -224,7 +256,7 @@ export default function Home() {
             </div>
 
             {/* Carrusel de tecnologías */}
-            <div className="mt-25 overflow-hidden max-w-6xl mx-auto py-1"
+            <div className="mt-16 md:mt-24 overflow-hidden max-w-5xl mx-auto py-1"
               onMouseEnter={e => e.currentTarget.querySelector('.track').style.animationPlayState = 'paused'}
               onMouseLeave={e => e.currentTarget.querySelector('.track').style.animationPlayState = 'running'}
             >
@@ -251,17 +283,17 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="education" className="pt-30">
-        <div className="max-w-6xl mx-auto px-6">
+      <section id="education" className="pt-28 md:pt-32">
+        <div className="max-w-5xl mx-auto px-4 md:px-6">
           {/* Título */}
-          <div className="flex items-center gap-4 mb-16">
+          <div className="flex items-center gap-4 mb-10 md:mb-16">
             <h2 className="font-[family-name:var(--font-syne)] text-3xl font-bold text-white">
               <span className="text-violet-400">/</span> educación
             </h2>
             <div className="flex-1 h-px bg-white/10"></div>
           </div>
 
-          <div className="flex gap-16 items-start">
+          <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">
             {/* Timeline */}
             <div className="relative pl-10">
               <div className="absolute left-4 top-0 h-full w-px bg-white/10" />
@@ -304,10 +336,20 @@ export default function Home() {
               ))}
             </div>
 
-            <div className="max-w-6xl mx-auto px-6">
-              <div className="flex justify-center">
-                <div style={{ position: 'relative', width: '580px', height: '400px' }}>
+            <div className="w-full">
+              <div className="grid grid-cols-2 gap-2 md:hidden">
+                {educationTags.map((label) => (
+                  <div
+                    key={label}
+                    className="px-2 py-2 rounded-full bg-white/[0.03] border border-white/10 text-center text-xs text-zinc-400 break-words"
+                  >
+                    {label}
+                  </div>
+                ))}
+              </div>
 
+              <div className="hidden md:flex justify-center">
+                <div style={{ position: 'relative', width: '580px', height: '400px' }}>                  
                   {/* Constelación */}
                   <svg
                     style={{
@@ -316,9 +358,7 @@ export default function Home() {
                       left: 0,
                       width: '100%',
                       height: '100%',
-                    }}
-                    viewBox="0 0 580 400"
-                  >
+                    }} viewBox="0 0 580 400">
 
                     {/* Líneas */}
                     <line x1="120" y1="60" x2="240" y2="140" stroke="rgba(196,181,253,0.25)" strokeWidth="0.8"/>
@@ -341,13 +381,13 @@ export default function Home() {
                     />
                     <circle cx="240" cy="140" r="3" fill="#ffffff"
                       style={{
-                          filter: `
-                            drop-shadow(0 0 3px #fff)
-                            drop-shadow(0 0 8px #8b5cf6)
-                            drop-shadow(0 0 16px #8b5cf6)
-                          `,
-                        }}
-                      />
+                        filter: `
+                          drop-shadow(0 0 3px #fff)
+                          drop-shadow(0 0 8px #8b5cf6)
+                          drop-shadow(0 0 16px #8b5cf6)
+                        `,
+                      }}
+                    />
                     <circle cx="290" cy="220" r="4" fill="#ffffff"
                       style={{
                         filter: `
@@ -463,12 +503,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="projects" className="pt-30">
-        <div className="max-w-6xl mx-auto px-6">
-
+      <section id="projects" className="pt-28 md:pt-32">
+        <div className="max-w-5xl mx-auto px-4 md:px-6">
           {/* Título */}
-          <div className="flex items-center gap-4 mb-16">
-            <h2 className="font-[family-name:var(--font-syne)] text-3xl font-bold text-white whitespace-nowrap">
+          <div className="flex items-center gap-4 mb-10 md:mb-16">
+            <h2 className="font-[family-name:var(--font-syne)] text-2xl sm:text-3xl font-bold text-white whitespace-normal sm:whitespace-nowrap">
               <span className="text-violet-400">/</span> proyectos
             </h2>
             <div className="flex-1 h-px bg-white/10"></div>
@@ -499,7 +538,7 @@ export default function Home() {
 
             return (
               <div className="relative rounded-2xl overflow-hidden border border-white/10 mb-8 group"
-                style={{ minHeight: '370px' }}
+                style={{ minHeight: '500px' }}
                 onMouseEnter={e => {
                   e.currentTarget.querySelector('.arrow-left').style.opacity = '1';
                   e.currentTarget.querySelector('.arrow-right').style.opacity = '1';
@@ -525,7 +564,7 @@ export default function Home() {
                     <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/95 via-zinc-950/70 to-transparent" />
 
                     {/* Contenido */}
-                    <div className="relative px-18 py-12 flex flex-col justify-between min-h-72">
+                    <div className="relative h-full px-6 md:px-20 py-10 md:py-12 flex flex-col justify-center min-h-72">
                       <div>
                         <div className="flex items-center gap-3 mb-4">
                           <span className="text-xs font-medium px-3 py-1 rounded-full bg-violet-500/20 text-violet-300 border border-violet-500/30">
@@ -538,9 +577,9 @@ export default function Home() {
                             <span className="text-xs font-medium px-3 py-1 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/25">En mantenimiento</span>
                           )}
                         </div>
-                        <h3 className="font-[family-name:var(--font-syne)] text-3xl font-bold text-white mb-3">{item.title}</h3>
-                        <p className="text-zinc-300 text-sm leading-relaxed max-w-xl mb-6">{item.description}</p>
-                        <div className="flex flex-wrap gap-2 mb-8">
+                        <h3 className="font-[family-name:var(--font-syne)] text-2xl sm:text-3xl font-bold text-white mb-3">{item.title}</h3>
+                        <p className="text-zinc-300 text-sm leading-relaxed md:max-w-lg mb-6">{item.description}</p>
+                        <div className="flex flex-wrap gap-2 mb-8 max-w-lg">
                           {item.techs.map(t => (
                             <span key={t} className="text-xs px-2.5 py-1 rounded-md bg-white/5 text-zinc-400 border border-white/8">{t}</span>
                           ))}
@@ -548,7 +587,7 @@ export default function Home() {
                       </div>
                       <div className="flex gap-3">
                         <a href={item.github} target="_blank" rel="noreferrer"
-                          className="flex items-center gap-2 px-4 py-2 rounded-lg border border-white/15 text-zinc-300 text-sm hover:text-white hover:border-white/30 transition-all">
+                          className="flex items-center justify-center gap-2 w-full sm:w-auto px-4 py-2 rounded-lg border border-white/15 text-zinc-300 text-sm hover:text-white hover:border-white/30 transition-all">
                           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
                           </svg>
@@ -624,7 +663,7 @@ export default function Home() {
           })()}
 
           {/* Grid 3 columnas */}
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
                 title: 'React Form App',
@@ -694,25 +733,23 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="contact" className="pt-30 pb-24">
-        <div className="max-w-5xl mx-auto px-6">
+      <section id="contact" className="pt-28 md:pt-32 pb-20 md:pb-24">
+        <div className="max-w-5xl mx-auto px-4 md:px-6">
           {/* Título */}
-          <div className="flex items-center gap-4 mb-16">
-            <h2 className="font-[family-name:var(--font-syne)] text-3xl font-bold text-white whitespace-nowrap">
+          <div className="flex items-center gap-4 mb-10 md:mb-16">
+            <h2 className="font-[family-name:var(--font-syne)] text-2xl sm:text-3xl font-bold text-white whitespace-normal sm:whitespace-nowrap">
               <span className="text-violet-400">/</span> contacto
             </h2>
             <div className="flex-1 h-px bg-white/10"></div>
           </div>
 
-          <div className="grid grid-cols-2 gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
             {/* Iconos */}
             <div>
               <p className="text-zinc-400 text-base leading-relaxed mb-10">
-                ¿Tienes una pregunta, una idea o simplemente quieres{' '}
-                <span className="text-white">saludar</span>?<br /><br />
-                Estoy abierta a oportunidades, a aprender de nuevas experiencias,
-                compartir ideas o conversar sobre tecnología.
-                No dudes en escribirme, estaré encantada de leerte.
+                ¿Tienes una pregunta, una idea o simplemente quieres saludar?<br /><br />
+                Estoy abierta a <span className="text-white">oportunidades,</span> a aprender de nuevas experiencias,
+                compartir ideas o conversar sobre <span className="text-white">tecnología.</span> No dudes en escribirme, estaré encantada de leerte.
               </p>
               <ul className="flex flex-col gap-4 list-none p-0 m-0">
                 <li>
@@ -810,7 +847,7 @@ export default function Home() {
       </section>
 
       <footer className="bg-zinc-950 border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-4">
           {/* Logo */}
           <span className="font-[family-name:var(--font-syne)] text-white font-bold text-base tracking-tight">
             val<span className="text-violet-500">.</span>Dev
