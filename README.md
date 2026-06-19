@@ -7,7 +7,7 @@
   Portafolio web de Valeria Paz Arana, estudiante de Desarrollo de Software.
   Diseñado para mostrar proyectos, habilidades y trayectoria académica.
 
-  **[Ver sitio ✰](https://tu-url.vercel.app)**
+  **[Ver sitio ✰](https://portfolio-val-dev.vercel.app/)**
 
   <br/>
 
