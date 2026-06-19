@@ -309,7 +309,7 @@ export default function Home() {
                   institution: 'Corporación Universitaria Adventista',
                   highlight: 'UNAC',
                   degree: 'Técnico en Desarrollo de Software',
-                  period: '2017 – 2024',
+                  period: '2023 – 2024',
                   description: 'Adquirí las bases en programación y desarrollo web, donde nació mi interés por el software.',
                 },
               ].map((item, i) => (
@@ -539,14 +539,6 @@ export default function Home() {
             return (
               <div className="relative rounded-2xl overflow-hidden border border-white/10 mb-8 group"
                 style={{ minHeight: '500px' }}
-                onMouseEnter={e => {
-                  e.currentTarget.querySelector('.arrow-left').style.opacity = '1';
-                  e.currentTarget.querySelector('.arrow-right').style.opacity = '1';
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.querySelector('.arrow-left').style.opacity = '0';
-                  e.currentTarget.querySelector('.arrow-right').style.opacity = '0';
-                }}
               >
                 {featured.map((item, i) => (
                   <div key={item.title} id={`featured-${i}`}
@@ -600,7 +592,7 @@ export default function Home() {
 
                 {/* Flechas */}
                 <button className="arrow-left absolute left-4 top-1/2 -translate-y-1/2 z-10 text-white/40 hover:text-white transition-colors"
-                  style={{ opacity: 0, transition: 'opacity 0.2s', background: 'none', border: 'none', cursor: 'pointer', fontSize: '28px', lineHeight: 1, padding: '8px' }}
+                  style={{ opacity: 1, transition: 'opacity 0.2s', background: 'none', border: 'none', cursor: 'pointer', fontSize: '28px', lineHeight: 1, padding: '8px' }}
                   onClick={() => {
                     const slides = document.querySelectorAll('[id^="featured-"]');
                     let current = [...slides].findIndex(s => s.style.opacity === '1');
@@ -617,7 +609,7 @@ export default function Home() {
                 </button>
 
                 <button className="arrow-right absolute right-4 top-1/2 -translate-y-1/2 z-10 text-white/40 hover:text-white transition-colors"
-                  style={{ opacity: 0, transition: 'opacity 0.2s', background: 'none', border: 'none', cursor: 'pointer', fontSize: '28px', lineHeight: 1, padding: '8px' }}
+                  style={{ opacity: 1, transition: 'opacity 0.2s', background: 'none', border: 'none', cursor: 'pointer', fontSize: '28px', lineHeight: 1, padding: '8px' }}
                   onClick={() => {
                     const slides = document.querySelectorAll('[id^="featured-"]');
                     let current = [...slides].findIndex(s => s.style.opacity === '1');
