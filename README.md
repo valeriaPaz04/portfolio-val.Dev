@@ -2,7 +2,7 @@
 
   <img src="public/valDevLogo.png" alt="val.Dev logo" width="60"/>
 
-  # val.Dev — Portafolio Personal
+  # Valeria Paz Arana - val.Dev
 
   Portafolio web de Valeria Paz Arana, estudiante de Desarrollo de Software.
   Diseñado para mostrar proyectos, habilidades y trayectoria académica.
