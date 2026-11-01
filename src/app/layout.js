@@ -12,8 +12,8 @@ const dm_sans = DM_Sans({
 });
 
 export const metadata = {
-  title: "val.Dev | Portafolio de Valeria Paz",
-  description: "Portafolio de Valeria Paz Arana",
+  title: "Valeria Paz Arana | Software Developer",
+  description: "Valeria Paz Arana - val.Dev",
   icons: {
     icon: "/valDevLogo.png",
   },
